@@ -82,6 +82,7 @@ export function TransactionFiltersBar({
             onChange={(e) => onChange({ instrument_id: e.target.value || undefined })}
             aria-label={UI_COPY.ARIA.FILTER_INSTRUMENT}
             className={SELECT_CLS}
+            size={1}
           >
             <option value="">{UI_COPY.TRANSACTIONS.FILTER_INSTRUMENT_ALL}</option>
             {instruments.map((i) => (

@@ -61,7 +61,7 @@ export function buildQueryString(
 
 const API_BASE_URL = (
   import.meta.env['VITE_API_BASE_URL'] as string | undefined
-) ?? 'http://localhost:8000/api/v1';
+) ?? '/api/v1';
 
 async function request<T>(
   path: string,

@@ -67,7 +67,7 @@ export const UI_COPY = {
     TAB_PORTFOLIO: 'Portfolio',
     TAB_TRANSACTIONS: 'Transactions',
     TAB_GOALS: 'Goals',
-    BACK_TO_CUSTOMERS: '← Back to Customers',
+    BACK_TO_CUSTOMERS: 'Back to Customers',
     RISK_PROFILE_TITLE: 'Risk Profile',
   },
 

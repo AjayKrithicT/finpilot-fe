@@ -3,6 +3,8 @@
  * Admin CSV import batch response and row-level rejection DTOs.
  */
 
+import type { PaginatedResponse } from './common.types';
+
 // ── Row-Level Rejection (quarantine table row) ────────────────────────────────
 
 export interface ImportRejectionItem {
@@ -10,9 +12,12 @@ export interface ImportRejectionItem {
   record_identifier: string;
   error_code: string;
   error_reason: string;
+  raw_payload?: Record<string, unknown>;
 }
 
 // ── Batch Import API Response ─────────────────────────────────────────────────
+
+export type ImportBatchStatus = 'COMPLETED' | 'FAILED';
 
 export interface ImportBatchResponse {
   batch_id: string;
@@ -20,5 +25,10 @@ export interface ImportBatchResponse {
   total_rows: number;
   imported_rows: number;
   rejected_rows: number;
+  status: ImportBatchStatus;
   rejections: ImportRejectionItem[];
 }
+
+// ── Paginated rejections (GET /admin/imports/transactions/:batchId/rejections) ─
+
+export type PaginatedRejections = PaginatedResponse<ImportRejectionItem>;

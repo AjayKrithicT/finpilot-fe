@@ -2,6 +2,9 @@
  * routes.constants.ts
  * All client-side route paths and API endpoint builders.
  * Never hardcode paths or URL segments in component logic.
+ *
+ * API_ENDPOINTS contains only the path segments AFTER the base URL.
+ * The base URL (including /api/v1) lives in apiClient.ts via VITE_API_BASE_URL.
  */
 
 // ── App Routes ───────────────────────────────────────────────────────────────
@@ -17,32 +20,34 @@ export const APP_ROUTES = {
 } as const;
 
 // ── API Endpoint Builders ────────────────────────────────────────────────────
-
-const API_BASE = '/api/v1';
+// These are path segments appended to VITE_API_BASE_URL (e.g. http://localhost:8000/api/v1).
+// Do NOT include /api/v1 here — it is already part of the base URL.
 
 export const API_ENDPOINTS = {
   // Auth
-  AUTH_LOGIN: `${API_BASE}/auth/login`,
+  AUTH_LOGIN: '/auth/login',
 
   // Customers
-  CUSTOMERS: `${API_BASE}/customers`,
-  CUSTOMER_DETAIL: (customerId: string) =>
-    `${API_BASE}/customers/${customerId}`,
+  CUSTOMERS: '/customers',
+  CUSTOMER_DETAIL: (customerId: string) => `/customers/${customerId}`,
 
   // Portfolio
   CUSTOMER_PORTFOLIO: (customerId: string) =>
-    `${API_BASE}/customers/${customerId}/portfolio`,
+    `/customers/${customerId}/portfolio`,
+  CUSTOMER_PORTFOLIO_POSITIONS: (customerId: string) =>
+    `/customers/${customerId}/portfolio/positions`,
 
   // Transactions
   CUSTOMER_TRANSACTIONS: (customerId: string) =>
-    `${API_BASE}/customers/${customerId}/transactions`,
-  INSTRUMENTS: `${API_BASE}/instruments`,
+    `/customers/${customerId}/transactions`,
+  INSTRUMENTS: '/instruments',
 
   // Goals
-  CUSTOMER_GOALS: (customerId: string) =>
-    `${API_BASE}/customers/${customerId}/goals`,
-  GOAL: (goalId: string) => `${API_BASE}/goals/${goalId}`,
+  CUSTOMER_GOALS: (customerId: string) => `/customers/${customerId}/goals`,
+  GOAL: (goalId: string) => `/goals/${goalId}`,
 
   // Admin
-  ADMIN_IMPORT_TRANSACTIONS: `${API_BASE}/admin/imports/transactions`,
+  ADMIN_IMPORT_TRANSACTIONS: '/admin/imports/transactions',
+  ADMIN_IMPORT_REJECTIONS: (batchId: string) =>
+    `/admin/imports/transactions/${batchId}/rejections`,
 } as const;

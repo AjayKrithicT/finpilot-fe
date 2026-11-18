@@ -72,9 +72,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const login = useCallback(
     (response: LoginResponse) => {
-      sessionStorage.setItem(STORAGE_KEYS.TOKEN, response.access_token);
+      sessionStorage.setItem(STORAGE_KEYS.TOKEN, response.token);
       sessionStorage.setItem(STORAGE_KEYS.USER, JSON.stringify(response.user));
-      setToken(response.access_token);
+      setToken(response.token);
       setUser(response.user);
       addToast(UI_COPY.LOGIN.WELCOME_TOAST(response.user.full_name), 'success');
       navigate(APP_ROUTES.CUSTOMERS, { replace: true });

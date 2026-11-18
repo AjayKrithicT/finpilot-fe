@@ -21,9 +21,7 @@ export interface AuthUser {
 
 export interface LoginResponse {
   user: AuthUser;
-  access_token: string;
-  token_type: string;
-  expires_in: number;
+  token: string;
 }
 
 // ── Context Contract ──────────────────────────────────────────────────────────

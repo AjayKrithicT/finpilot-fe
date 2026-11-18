@@ -4,16 +4,16 @@
  * chart slices, and individual holdings position DTOs.
  */
 
-import type { AccountType, AccountStatus, AssetClass } from '../constants/domain.constants';
+import type { AccountType, AssetClass } from '../constants/domain.constants';
+import type { PaginatedResponse } from './common.types';
 
 // ── Portfolio Totals (KPI cards) ──────────────────────────────────────────────
 
 export interface PortfolioTotals {
-  total_market_value: number;
   total_cost_basis: number;
+  total_market_value: number;
   total_unrealised_gain_loss: number;
   total_unrealised_gain_loss_pct: number;
-  active_accounts_count: number;
 }
 
 // ── Per-Account Allocation ────────────────────────────────────────────────────
@@ -22,11 +22,9 @@ export interface AccountAllocation {
   account_id: string;
   account_type: AccountType;
   provider: string;
-  status: AccountStatus;
   cost_basis: number;
   market_value: number;
   unrealised_gain_loss: number;
-  unrealised_gain_loss_pct: number;
 }
 
 // ── Asset-Class Donut Slice ───────────────────────────────────────────────────
@@ -40,13 +38,11 @@ export interface AssetClassAllocation {
 // ── Holdings Position (table row) ─────────────────────────────────────────────
 
 export interface PortfolioPosition {
-  position_id: string;
   instrument_id: string;
   symbol: string;
   instrument_name: string;
-  account_id: string;
-  account_type: AccountType;
   asset_class: AssetClass;
+  account_id: string;
   quantity: number;
   avg_cost: number;
   last_price: number;
@@ -60,10 +56,10 @@ export interface PortfolioPosition {
 
 export interface PortfolioResponse {
   customer_id: string;
-  snapshot_date: string;
-  price_as_of: string;
+  snapshot_date: string | null;
+  price_as_of: string | null;
   totals: PortfolioTotals;
-  allocation_by_account: AccountAllocation[];
+  accounts: AccountAllocation[];
   allocation_by_asset_class: AssetClassAllocation[];
   positions: PortfolioPosition[];
 }
@@ -74,3 +70,7 @@ export interface PositionFilters {
   search: string;
   asset_class: AssetClass | '';
 }
+
+// ── Paginated positions API response ──────────────────────────────────────────
+
+export type PaginatedPositions = PaginatedResponse<PortfolioPosition>;

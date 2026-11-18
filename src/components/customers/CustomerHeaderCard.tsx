@@ -83,22 +83,28 @@ export function CustomerHeaderCard({
               {UI_COPY.WORKSPACE.RISK_PROFILE_TITLE}
             </span>
           </div>
-          <span className="text-[#0F172A]">
-            <span className="text-[#64748B] text-xs">Level: </span>
-            <strong className="font-medium">{rp.risk_level}</strong>
-          </span>
-          <span className="text-[#0F172A] tabular-nums">
-            <span className="text-[#64748B] text-xs">Score: </span>
-            <strong className="font-medium">{rp.risk_score}</strong>
-          </span>
-          <span className="text-[#0F172A] tabular-nums">
-            <span className="text-[#64748B] text-xs">Horizon: </span>
-            <strong className="font-medium">{rp.horizon_years} yrs</strong>
-          </span>
-          <span className="text-[#0F172A]">
-            <span className="text-[#64748B] text-xs">Liquidity: </span>
-            <strong className="font-medium">{rp.liquidity_need}</strong>
-          </span>
+          {rp ? (
+            <>
+              <span className="text-[#0F172A]">
+                <span className="text-[#64748B] text-xs">Level: </span>
+                <strong className="font-medium">{rp.risk_level}</strong>
+              </span>
+              <span className="text-[#0F172A] tabular-nums">
+                <span className="text-[#64748B] text-xs">Score: </span>
+                <strong className="font-medium">{rp.risk_score}</strong>
+              </span>
+              <span className="text-[#0F172A] tabular-nums">
+                <span className="text-[#64748B] text-xs">Horizon: </span>
+                <strong className="font-medium">{rp.horizon_years} yrs</strong>
+              </span>
+              <span className="text-[#0F172A]">
+                <span className="text-[#64748B] text-xs">Liquidity: </span>
+                <strong className="font-medium">{rp.liquidity_need}</strong>
+              </span>
+            </>
+          ) : (
+            <span className="text-[#94A3B8] text-xs italic">Not available</span>
+          )}
         </div>
       </div>
 

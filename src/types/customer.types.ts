@@ -28,6 +28,7 @@ export interface CustomerSummary {
 
 export interface CustomerListFilters {
   search?: string;
+  city?: string;
   kyc_status?: KycStatus | '';
   segment?: CustomerSegment | '';
   page?: number;
@@ -37,23 +38,22 @@ export interface CustomerListFilters {
 // ── Risk Profile ──────────────────────────────────────────────────────────────
 
 export interface RiskProfile {
-  risk_level: RiskLevel;
   risk_score: number;
+  risk_level: RiskLevel;
+  assessed_at: string;
   horizon_years: number;
   liquidity_need: LiquidityNeed;
 }
 
-// ── Account Summary ───────────────────────────────────────────────────────────
+// ── Account (from CustomerDetail) ─────────────────────────────────────────────
 
 export interface AccountSummary {
   account_id: string;
   account_type: AccountType;
   provider: string;
+  opened_at: string;
   status: AccountStatus;
-  cost_basis: number;
-  market_value: number;
-  unrealised_gain_loss: number;
-  unrealised_gain_loss_pct: number;
+  base_currency: string;
 }
 
 // ── Customer Detail (workspace) ───────────────────────────────────────────────
@@ -65,8 +65,10 @@ export interface CustomerDetail {
   phone: string;
   city: string;
   state: string;
+  date_of_birth: string;
+  onboarded_at: string;
   kyc_status: KycStatus;
   segment: CustomerSegment;
-  risk_profile: RiskProfile;
+  risk_profile: RiskProfile | null;
   accounts: AccountSummary[];
 }

@@ -56,14 +56,16 @@ export function LoginPage() {
     <div className="min-h-screen flex">
       {/* ── Left decorative panel (hidden on small screens) ── */}
       <div
-        className="hidden lg:flex lg:w-1/2 xl:w-3/5 relative bg-[#0F172A] items-center justify-center overflow-hidden"
+        className="hidden lg:flex lg:w-1/2 xl:w-3/5 items-center justify-center overflow-hidden"
         aria-hidden="true"
+        style={{
+          backgroundColor: '#0F172A',
+          backgroundImage: 'url(/assets/login-bg.svg)',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat',
+        }}
       >
-        <img
-          src="/assets/login-bg.svg"
-          alt=""
-          className="absolute inset-0 w-full h-full object-cover opacity-80"
-        />
         <div className="relative z-10 text-center px-12 max-w-md">
           <img
             src="/assets/finpilot-logo.svg"

@@ -87,6 +87,11 @@ export function CustomerWorkspacePage() {
         </div>
       )}
 
+      {/* Not found — loaded successfully but no data returned */}
+      {!isLoading && !customer && !error && (
+        <p className="text-sm text-[#64748B]">Customer not found.</p>
+      )}
+
       {/* Customer header + tabs */}
       {!isLoading && customer && customerId && (
         <>

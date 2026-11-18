@@ -1,4 +1,10 @@
+/* Google Fonts must be imported before tailwindcss */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap");
+
 @import "tailwindcss";
+
+/* Tell Tailwind v4 where to scan for class names */
+@source "../src/**/*.{ts,tsx}";
 
 @theme {
   /* ── Core Surfaces, Borders & Text ─────────────────────────────────── */
@@ -44,9 +50,6 @@
   --font-sans: "Inter", system-ui, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, monospace;
 }
-
-/* ── Google Fonts: Inter + JetBrains Mono ───────────────────────────── */
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap");
 
 /* ── Global Base Reset ──────────────────────────────────────────────── */
 *,

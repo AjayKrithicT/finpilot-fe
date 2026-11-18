@@ -14,13 +14,13 @@ const DEMO_CREDENTIALS: Record<
 > = {
   [UserRole.VIEWER]: {
     email: 'viewer@finpilot.local',
-    password: 'viewer123',
+    password: 'Viewer@123',
     title: UI_COPY.LOGIN.DEMO_VIEWER_TITLE,
     desc: UI_COPY.LOGIN.DEMO_VIEWER_DESC,
   },
   [UserRole.ADMIN]: {
     email: 'admin@finpilot.local',
-    password: 'admin123',
+    password: 'Admin@123',
     title: UI_COPY.LOGIN.DEMO_ADMIN_TITLE,
     desc: UI_COPY.LOGIN.DEMO_ADMIN_DESC,
   },

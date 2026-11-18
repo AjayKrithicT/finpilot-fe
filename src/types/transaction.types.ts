@@ -5,7 +5,6 @@
  */
 
 import type {
-  AccountType,
   AssetClass,
   TransactionType,
   TransactionStatus,
@@ -26,10 +25,7 @@ export interface InstrumentOption {
 export interface TransactionItem {
   transaction_id: string;
   account_id: string;
-  account_type: AccountType;
   instrument_id: string;
-  symbol: string;
-  instrument_name: string;
   transaction_type: TransactionType;
   trade_date: string;
   quantity: number;

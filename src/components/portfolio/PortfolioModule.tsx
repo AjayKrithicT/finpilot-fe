@@ -75,10 +75,10 @@ export function PortfolioModule({ customerId }: PortfolioModuleProps) {
       {/* Account summary cards */}
       <Card
         title={UI_COPY.PORTFOLIO.ACCOUNTS_SECTION_TITLE}
-        noPadding={portfolio.allocation_by_account.length > 0}
+        noPadding={portfolio.accounts.length > 0}
       >
-        <div className={portfolio.allocation_by_account.length > 0 ? 'p-5' : ''}>
-          <AccountSummaryCards accounts={portfolio.allocation_by_account} />
+        <div className={portfolio.accounts.length > 0 ? 'p-5' : ''}>
+          <AccountSummaryCards accounts={portfolio.accounts} />
         </div>
       </Card>
 
@@ -92,7 +92,7 @@ export function PortfolioModule({ customerId }: PortfolioModuleProps) {
         <h2 className="text-[18px] font-semibold leading-[26px] text-[#0F172A] mb-4">
           {UI_COPY.PORTFOLIO.POSITIONS_SECTION_TITLE}
         </h2>
-        <PositionsTable positions={portfolio.positions} />
+        <PositionsTable customerId={customerId} />
       </div>
     </div>
   );

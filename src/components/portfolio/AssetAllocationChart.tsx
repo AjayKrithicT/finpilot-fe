@@ -84,17 +84,17 @@ export function AssetAllocationChart({ allocations }: AssetAllocationChartProps)
         </ResponsiveContainer>
       </div>
 
-      {/* Legend */}
-      <div className="flex-1 w-full grid grid-cols-1 sm:grid-cols-2 gap-2">
+      {/* Legend — two equal columns, each item is a tight flex row centered in its cell */}
+      <div className="flex-1 w-full grid grid-cols-2 gap-x-4 gap-y-2">
         {data.map((entry) => (
-          <div key={entry.asset_class} className="flex items-center gap-2.5">
+          <div key={entry.asset_class} className="flex items-center justify-center gap-2">
             <span
               className="w-2.5 h-2.5 rounded-full shrink-0"
               style={{ backgroundColor: entry.color }}
               aria-hidden="true"
             />
-            <span className="text-sm text-[#475569] flex-1 truncate">{entry.name}</span>
-            <span className="text-sm font-medium text-[#0F172A] tabular-nums">
+            <span className="text-sm text-[#475569] whitespace-nowrap">{entry.name}</span>
+            <span className="text-sm font-medium text-[#0F172A] tabular-nums whitespace-nowrap">
               {formatPercent(entry.allocation_pct)}
             </span>
           </div>
