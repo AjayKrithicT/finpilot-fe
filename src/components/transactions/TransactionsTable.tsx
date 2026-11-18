@@ -8,6 +8,7 @@ import { ChevronUpIcon, ChevronDownIcon } from 'lucide-react';
 import { UI_COPY } from '../../constants/ui.constants';
 import {
   SortDirection,
+  TransactionStatus,
   TRANSACTION_TYPE_LABELS,
   TRANSACTION_STATUS_LABELS,
 } from '../../constants/domain.constants';
@@ -108,8 +109,26 @@ export function TransactionsTable({
             </tr>
           </thead>
           <tbody className="divide-y divide-[#E2E8F0]">
-            {transactions.map((t) => (
-              <tr key={t.transaction_id} className="hover:bg-[#F8FAFC] transition-colors">
+            {transactions.map((t) => {
+              const isReversed = t.status === TransactionStatus.REVERSED;
+              const isPending = t.status === TransactionStatus.PENDING;
+              const rowClass = isReversed
+                ? 'bg-[#FFF7F7] opacity-60 hover:opacity-80 transition-opacity'
+                : isPending
+                  ? 'bg-[#FFFBEB] hover:bg-[#FFF8E1] transition-colors'
+                  : 'hover:bg-[#F8FAFC] transition-colors';
+              return (
+                <tr
+                  key={t.transaction_id}
+                  className={rowClass}
+                  aria-label={
+                    isReversed
+                      ? `Reversed transaction ${t.transaction_id}`
+                      : isPending
+                        ? `Pending transaction ${t.transaction_id}`
+                        : undefined
+                  }
+                >
                 <td className={TD}>
                   <span className="font-mono text-[12px] text-[#64748B]">
                     {t.transaction_id}
@@ -153,7 +172,8 @@ export function TransactionsTable({
                   />
                 </td>
               </tr>
-            ))}
+              );
+            })}
           </tbody>
         </table>
       </div>

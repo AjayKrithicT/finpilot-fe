@@ -26,6 +26,8 @@ export interface TransactionItem {
   transaction_id: string;
   account_id: string;
   instrument_id: string;
+  symbol: string;
+  instrument_name: string;
   transaction_type: TransactionType;
   trade_date: string;
   quantity: number;

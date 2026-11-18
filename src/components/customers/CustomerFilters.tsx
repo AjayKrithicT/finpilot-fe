@@ -44,7 +44,7 @@ export function CustomerFilters({ filters, onChange, onReset }: CustomerFiltersP
   }, [filters.search]);
 
   const hasActiveFilters =
-    !!filters.search || !!filters.kyc_status || !!filters.segment;
+    !!filters.search || !!filters.city || !!filters.kyc_status || !!filters.segment;
 
   return (
     <div className="flex flex-wrap items-end gap-3">
@@ -77,6 +77,23 @@ export function CustomerFilters({ filters, onChange, onReset }: CustomerFiltersP
             <XIcon className="w-3.5 h-3.5" aria-hidden="true" />
           </button>
         )}
+      </div>
+
+      {/* City */}
+      <div className="relative min-w-[160px]">
+        <input
+          type="text"
+          value={filters.city ?? ''}
+          onChange={(e) =>
+            onChange({ city: e.target.value || undefined })
+          }
+          placeholder={UI_COPY.CUSTOMERS.FILTER_CITY_PLACEHOLDER}
+          aria-label={UI_COPY.ARIA.FILTER_CITY}
+          className="w-full h-10 rounded-lg border border-[#E2E8F0] bg-white
+            px-3 text-sm text-[#0F172A] placeholder:text-[#94A3B8]
+            focus-visible:outline-none focus-visible:ring-2
+            focus-visible:ring-[#2563EB] focus-visible:ring-offset-2 transition-colors"
+        />
       </div>
 
       {/* KYC Status */}
