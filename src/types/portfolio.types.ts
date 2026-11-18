@@ -4,7 +4,7 @@
  * chart slices, and individual holdings position DTOs.
  */
 
-import type { AccountType, AssetClass } from '../constants/domain.constants';
+import type { AccountType, AccountStatus, AssetClass } from '../constants/domain.constants';
 import type { PaginatedResponse } from './common.types';
 
 // ── Portfolio Totals (KPI cards) ──────────────────────────────────────────────
@@ -14,6 +14,7 @@ export interface PortfolioTotals {
   total_market_value: number;
   total_unrealised_gain_loss: number;
   total_unrealised_gain_loss_pct: number;
+  active_accounts_count: number;
 }
 
 // ── Per-Account Allocation ────────────────────────────────────────────────────
@@ -22,9 +23,11 @@ export interface AccountAllocation {
   account_id: string;
   account_type: AccountType;
   provider: string;
+  status: AccountStatus;
   cost_basis: number;
   market_value: number;
   unrealised_gain_loss: number;
+  unrealised_gain_loss_pct: number;
 }
 
 // ── Asset-Class Donut Slice ───────────────────────────────────────────────────

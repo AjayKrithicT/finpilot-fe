@@ -1,0 +1,14 @@
+services:
+
+  # ── Frontend (Nginx serving the Vite production build) ───────────────────────
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    ports:
+      - "3000:80"
+    # The backend API must already be running on the host at port 8000.
+    # nginx.conf proxies /api/ → http://host-gateway:8000
+    extra_hosts:
+      - "host-gateway:host-gateway"

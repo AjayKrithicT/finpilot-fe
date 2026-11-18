@@ -54,12 +54,23 @@ const EMPTY_PAGINATION: PaginationMeta = {
   total_pages: 1,
 };
 
-function QuarantineTable({ batchId, totalRejections }: { batchId: string; totalRejections: number }) {
+function QuarantineTable({
+  batchId,
+  inlineRejections,
+  totalRejections,
+}: {
+  batchId: string;
+  inlineRejections: ImportRejectionItem[];
+  totalRejections: number;
+}) {
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(PAGINATION_DEFAULTS.LIMIT);
   const [result, setResult] = useState<PaginatedRejections | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+
+  // Use inline rejections on page 1; fetch from API when paginating further
+  const needsFetch = page > 1 || limit !== PAGINATION_DEFAULTS.LIMIT;
 
   const load = useCallback(async () => {
     setIsLoading(true);
@@ -74,16 +85,28 @@ function QuarantineTable({ batchId, totalRejections }: { batchId: string; totalR
     }
   }, [batchId, page, limit]);
 
-  useEffect(() => { void load(); }, [load]);
+  useEffect(() => {
+    if (needsFetch) { void load(); }
+  }, [needsFetch, load]);
 
   const handleLimitChange = (value: number) => { setLimit(value); setPage(1); };
 
-  const rows: ImportRejectionItem[] = result?.data ?? [];
-  const pagination: PaginationMeta = result?.pagination ?? {
-    ...EMPTY_PAGINATION,
-    total_items: totalRejections,
-    total_pages: Math.ceil(totalRejections / limit) || 1,
-  };
+  const rows: ImportRejectionItem[] = needsFetch
+    ? (result?.data ?? [])
+    : inlineRejections;
+
+  const pagination: PaginationMeta = needsFetch
+    ? (result?.pagination ?? {
+        ...EMPTY_PAGINATION,
+        total_items: totalRejections,
+        total_pages: Math.ceil(totalRejections / limit) || 1,
+      })
+    : {
+        page: 1,
+        limit,
+        total_items: totalRejections,
+        total_pages: Math.ceil(totalRejections / limit) || 1,
+      };
 
   return (
     <div>
@@ -93,7 +116,7 @@ function QuarantineTable({ batchId, totalRejections }: { batchId: string; totalR
       <div className="bg-white border border-[#E2E8F0] rounded-xl shadow-xs overflow-hidden">
         {error && <ErrorBanner message={error} onRetry={() => void load()} />}
 
-        {isLoading ? (
+        {isLoading && needsFetch ? (
           <div className="p-4">
             <TableSkeleton rows={limit} cols={4} />
           </div>
@@ -180,6 +203,7 @@ export function ImportResultPanel({ result }: ImportResultPanelProps) {
       ) : (
         <QuarantineTable
           batchId={result.batch_id}
+          inlineRejections={result.rejections}
           totalRejections={result.rejected_rows}
         />
       )}

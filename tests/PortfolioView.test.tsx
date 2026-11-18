@@ -31,8 +31,10 @@ vi.mock('../src/services/apiClient', () => ({
 // ── Mock portfolio.api ────────────────────────────────────────────────────────
 
 const mockFetchPortfolio = vi.fn();
+const mockFetchPositions = vi.fn();
 vi.mock('../src/services/portfolio.api', () => ({
   fetchCustomerPortfolio: (...args: unknown[]) => mockFetchPortfolio(...args),
+  fetchPortfolioPositions: (...args: unknown[]) => mockFetchPositions(...args),
 }));
 
 // ── Fixtures ──────────────────────────────────────────────────────────────────
@@ -48,7 +50,7 @@ const POPULATED_PORTFOLIO: PortfolioResponse = {
     total_unrealised_gain_loss_pct: 8.94,
     active_accounts_count: 2,
   },
-  allocation_by_account: [
+  accounts: [
     {
       account_id: 'A00002',
       account_type: AccountType.BROKERAGE,
@@ -65,7 +67,6 @@ const POPULATED_PORTFOLIO: PortfolioResponse = {
   ],
   positions: [
     {
-      position_id: 'P001',
       instrument_id: 'EQ001',
       symbol: 'RELIANCE',
       instrument_name: 'Reliance Industries',
@@ -94,7 +95,7 @@ const EMPTY_PORTFOLIO: PortfolioResponse = {
     total_unrealised_gain_loss_pct: 0,
     active_accounts_count: 0,
   },
-  allocation_by_account: [],
+  accounts: [],
   allocation_by_asset_class: [],
   positions: [],
 };
@@ -113,6 +114,10 @@ function getKpiCard(labelText: string): HTMLElement {
 describe('PortfolioModule — populated portfolio', () => {
   beforeEach(() => {
     mockFetchPortfolio.mockResolvedValue(POPULATED_PORTFOLIO);
+    mockFetchPositions.mockResolvedValue({
+      data: POPULATED_PORTFOLIO.positions,
+      pagination: { page: 1, limit: 20, total_items: 1, total_pages: 1 },
+    });
   });
 
   it('renders Total Market Value KPI label', async () => {
@@ -176,6 +181,10 @@ describe('PortfolioModule — populated portfolio', () => {
 describe('PortfolioModule — zero-position portfolio', () => {
   beforeEach(() => {
     mockFetchPortfolio.mockResolvedValue(EMPTY_PORTFOLIO);
+    mockFetchPositions.mockResolvedValue({
+      data: [],
+      pagination: { page: 1, limit: 20, total_items: 0, total_pages: 1 },
+    });
   });
 
   it('renders ₹0.00 for Total Market Value KPI', async () => {
@@ -200,6 +209,10 @@ describe('PortfolioModule — zero-position portfolio', () => {
 describe('PortfolioModule — API error', () => {
   beforeEach(() => {
     mockFetchPortfolio.mockRejectedValue(new Error('Network error'));
+    mockFetchPositions.mockResolvedValue({
+      data: [],
+      pagination: { page: 1, limit: 20, total_items: 0, total_pages: 1 },
+    });
   });
 
   it('renders ErrorBanner on API failure', async () => {

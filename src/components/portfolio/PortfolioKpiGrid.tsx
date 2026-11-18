@@ -41,8 +41,8 @@ function KpiCard({ label, value, sub, subPositive }: KpiCardProps) {
 
 interface PortfolioKpiGridProps {
   totals: PortfolioTotals;
-  snapshotDate: string;
-  priceAsOf: string;
+  snapshotDate: string | null;
+  priceAsOf: string | null;
 }
 
 export function PortfolioKpiGrid({
