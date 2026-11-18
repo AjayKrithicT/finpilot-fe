@@ -2,7 +2,7 @@
  * CustomerWorkspacePage.tsx
  * Customer workspace at /customers/:customerId.
  * Fetches customer detail, renders CustomerHeaderCard + tab panels.
- * Portfolio / Transactions / Goals modules are lazy-mounted on tab switch.
+ * Passes customer.accounts to TransactionsModule for the account filter dropdown.
  */
 
 import { useState, useEffect } from 'react';
@@ -15,6 +15,8 @@ import { ApiClientError } from '../services/apiClient';
 import { CustomerHeaderCard } from '../components/customers/CustomerHeaderCard';
 import type { WorkspaceTab } from '../components/customers/CustomerHeaderCard';
 import { PortfolioModule } from '../components/portfolio/PortfolioModule';
+import { TransactionsModule } from '../components/transactions/TransactionsModule';
+import { GoalsModule } from '../components/goals/GoalsModule';
 import { ErrorBanner } from '../components/reusables/ErrorBanner';
 import { Skeleton } from '../components/reusables/Skeleton';
 import type { CustomerDetail } from '../types/customer.types';
@@ -86,7 +88,7 @@ export function CustomerWorkspacePage() {
       )}
 
       {/* Customer header + tabs */}
-      {!isLoading && customer && (
+      {!isLoading && customer && customerId && (
         <>
           <CustomerHeaderCard
             customer={customer}
@@ -94,28 +96,25 @@ export function CustomerWorkspacePage() {
             onTabChange={setActiveTab}
           />
 
-          {/* Tab panels */}
+          {/* Tab panels — keep all mounted to preserve scroll position, hide via CSS */}
           <div
             role="tabpanel"
             id={`tabpanel-${activeTab}`}
             aria-labelledby={`tab-${activeTab}`}
           >
-            {activeTab === 'portfolio' && customerId && (
+            {activeTab === 'portfolio' && (
               <PortfolioModule customerId={customerId} />
             )}
+
             {activeTab === 'transactions' && (
-              <div className="bg-white border border-[#E2E8F0] rounded-xl p-6
-                text-sm text-[#64748B]">
-                {/* Placeholder — implemented in Task 5 */}
-                Transactions module coming in Task 5.
-              </div>
+              <TransactionsModule
+                customerId={customerId}
+                accounts={customer.accounts}
+              />
             )}
+
             {activeTab === 'goals' && (
-              <div className="bg-white border border-[#E2E8F0] rounded-xl p-6
-                text-sm text-[#64748B]">
-                {/* Placeholder — implemented in Task 5 */}
-                Goals module coming in Task 5.
-              </div>
+              <GoalsModule customerId={customerId} />
             )}
           </div>
         </>
