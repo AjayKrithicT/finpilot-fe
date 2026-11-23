@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" fill="none" aria-hidden="true">
+  <defs>
+    <linearGradient id="bg-base" x1="0" y1="0" x2="1440" y2="900" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#090D16" />
+      <stop offset="50%" stop-color="#0F172A" />
+      <stop offset="100%" stop-color="#111827" />
+    </linearGradient>
+    <radialGradient id="glow-blue" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(260 180) rotate(35) scale(620 460)">
+      <stop offset="0%" stop-color="#2563EB" stop-opacity="0.28" />
+      <stop offset="100%" stop-color="#2563EB" stop-opacity="0" />
+    </radialGradient>
+    <radialGradient id="glow-emerald" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(1180 740) rotate(-25) scale(560 420)">
+      <stop offset="0%" stop-color="#0D9488" stop-opacity="0.22" />
+      <stop offset="100%" stop-color="#0D9488" stop-opacity="0" />
+    </radialGradient>
+    <pattern id="grid-pattern" width="48" height="48" patternUnits="userSpaceOnUse">
+      <path d="M 48 0 L 0 0 0 48" fill="none" stroke="#94A3B8" stroke-opacity="0.07" stroke-width="1" />
+    </pattern>
+  </defs>
+  <rect width="1440" height="900" fill="url(#bg-base)" />
+  <rect width="1440" height="900" fill="url(#grid-pattern)" />
+  <rect width="1440" height="900" fill="url(#glow-blue)" />
+  <rect width="1440" height="900" fill="url(#glow-emerald)" />
+  <path d="M-40 690C240 610 430 740 720 650C1010 560 1200 410 1500 450" stroke="#3B82F6" stroke-opacity="0.16" stroke-width="2" />
+  <path d="M-40 740C260 660 460 790 750 700C1040 610 1230 470 1500 510" stroke="#10B981" stroke-opacity="0.12" stroke-width="1.5" />
+</svg>

@@ -1,0 +1,93 @@
+/* Google Fonts must be imported before tailwindcss */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap");
+
+@import "tailwindcss";
+
+/* Tell Tailwind v4 where to scan for class names */
+@source "../src/**/*.{ts,tsx}";
+
+@theme {
+  /* ── Core Surfaces, Borders & Text ─────────────────────────────────── */
+  --color-canvas: #F8FAFC;
+  --color-surface: #FFFFFF;
+  --color-surface-muted: #F1F5F9;
+  --color-nav-bg: #0F172A;
+  --color-nav-hover: #1E293B;
+  --color-border: #E2E8F0;
+  --color-border-strong: #CBD5E1;
+  --color-text-primary: #0F172A;
+  --color-text-secondary: #475569;
+  --color-text-muted: #64748B;
+
+  /* ── Brand & Interactive Accents ────────────────────────────────────── */
+  --color-brand: #2563EB;
+  --color-brand-hover: #1D4ED8;
+  --color-brand-soft: #EFF6FF;
+  --color-brand-border: #BFDBFE;
+
+  /* ── Semantic Financial & Status ────────────────────────────────────── */
+  --color-success-text: #047857;
+  --color-success-surface: #ECFDF5;
+  --color-success-border: #A7F3D0;
+
+  --color-danger-text: #B91C1C;
+  --color-danger-surface: #FEF2F2;
+  --color-danger-border: #FECACA;
+
+  --color-warning-text: #B45309;
+  --color-warning-surface: #FFFBEB;
+  --color-warning-border: #FDE68A;
+
+  --color-info-text: #0369A1;
+  --color-info-surface: #F0F9FF;
+  --color-info-border: #BAE6FD;
+
+  --color-neutral-text: #334155;
+  --color-neutral-surface: #F1F5F9;
+  --color-neutral-border: #CBD5E1;
+
+  /* ── Font Families ──────────────────────────────────────────────────── */
+  --font-sans: "Inter", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+}
+
+/* ── Global Base Reset ──────────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--color-canvas);
+  color: var(--color-text-primary);
+  font-family: var(--font-sans);
+  font-size: 14px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Tabular numeric alignment for financial figures ────────────────── */
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+/* ── Focus ring utility (WCAG 2.1 AA) ──────────────────────────────── */
+.focus-ring {
+  outline: none;
+}
+.focus-ring:focus-visible {
+  outline: 2px solid var(--color-brand);
+  outline-offset: 2px;
+  border-radius: 4px;
+}

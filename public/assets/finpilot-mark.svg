@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" fill="none" role="img" aria-label="FinPilot Icon">
+  <defs>
+    <linearGradient id="fp-mark-bg" x1="0" y1="0" x2="40" y2="40" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#2563EB" />
+      <stop offset="100%" stop-color="#0F172A" />
+    </linearGradient>
+  </defs>
+  <rect width="40" height="40" rx="10" fill="url(#fp-mark-bg)" />
+  <path d="M10 27L17 20L22 24L30 14" stroke="#34D399" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+  <path d="M25 14H30V19" stroke="#34D399" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+</svg>
