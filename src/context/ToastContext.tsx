@@ -26,7 +26,7 @@ interface ToastContextValue {
   addToast: (message: string, tone: ToastTone) => void;
 }
 
-export { ToastContextValue };
+export type { ToastContextValue };
 
 // ── Tone → Tailwind classes ───────────────────────────────────────────────────
 
