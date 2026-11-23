@@ -8,7 +8,7 @@
 
 import { Navigate } from 'react-router-dom';
 import type { ReactNode } from 'react';
-import { useAuth } from '../../context/AuthContext';
+import { useAuth } from '../../context/useAuth';
 import { APP_ROUTES } from '../../constants/routes.constants';
 import { AppShell } from './AppShell';
 import type { UserRole } from '../../constants/domain.constants';

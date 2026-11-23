@@ -7,7 +7,6 @@
 
 import {
   createContext,
-  useContext,
   useState,
   useEffect,
   useCallback,
@@ -20,11 +19,12 @@ import { APP_ROUTES } from '../constants/routes.constants';
 import { UserRole } from '../constants/domain.constants';
 import { UI_COPY } from '../constants/ui.constants';
 import type { AuthContextValue, AuthUser, LoginResponse } from '../types/auth.types';
-import { useToast } from './ToastContext';
+import { useToast } from './useToast';
 
 // ── Context ───────────────────────────────────────────────────────────────────
 
-const AuthContext = createContext<AuthContextValue | null>(null);
+// eslint-disable-next-line react-refresh/only-export-components
+export const AuthContext = createContext<AuthContextValue | null>(null);
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
 
@@ -94,10 +94,3 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
 
-// ── Hook ──────────────────────────────────────────────────────────────────────
-
-export function useAuth(): AuthContextValue {
-  const ctx = useContext(AuthContext);
-  if (!ctx) throw new Error('useAuth must be used inside <AuthProvider>');
-  return ctx;
-}

@@ -67,7 +67,7 @@ export function TransactionsModule({ customerId, accounts }: TransactionsModuleP
   }, [customerId]);
 
   useEffect(() => {
-    void load(filters);
+    (async () => { await load(filters); })();
   }, [filters, load]);
 
   const handleFilterChange = (updated: Partial<TransactionFilters>) => {

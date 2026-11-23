@@ -64,7 +64,7 @@ function QuarantineTable({
   totalRejections: number;
 }) {
   const [page, setPage] = useState(1);
-  const [limit, setLimit] = useState(PAGINATION_DEFAULTS.LIMIT);
+  const [limit, setLimit] = useState<number>(PAGINATION_DEFAULTS.LIMIT);
   const [result, setResult] = useState<PaginatedRejections | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -86,7 +86,7 @@ function QuarantineTable({
   }, [batchId, page, limit]);
 
   useEffect(() => {
-    if (needsFetch) { void load(); }
+    if (needsFetch) { (async () => { await load(); })(); }
   }, [needsFetch, load]);
 
   const handleLimitChange = (value: number) => { setLimit(value); setPage(1); };

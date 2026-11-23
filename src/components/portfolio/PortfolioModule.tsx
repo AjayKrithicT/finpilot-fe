@@ -42,7 +42,7 @@ export function PortfolioModule({ customerId }: PortfolioModuleProps) {
   }, [customerId]);
 
   useEffect(() => {
-    void load();
+    (async () => { await load(); })();
   }, [load]);
 
   if (error) {

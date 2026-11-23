@@ -8,7 +8,7 @@ import { PlusIcon } from 'lucide-react';
 import { fetchCustomerGoals, createCustomerGoal, updateGoal } from '../../services/goal.api';
 import { ApiClientError } from '../../services/apiClient';
 import { UI_COPY } from '../../constants/ui.constants';
-import { useToast } from '../../context/ToastContext';
+import { useToast } from '../../context/useToast';
 import { GoalCard } from './GoalCard';
 import { GoalFormModal } from './GoalFormModal';
 import { Button } from '../reusables/Button';
@@ -45,7 +45,9 @@ export function GoalsModule({ customerId }: GoalsModuleProps) {
     }
   }, [customerId]);
 
-  useEffect(() => { void load(); }, [load]);
+  useEffect(() => {
+    (async () => { await load(); })();
+  }, [load]);
 
   const handleOpenCreate = () => {
     setEditingGoal(undefined);

@@ -52,7 +52,6 @@ function makeFile(name: string, size: number, type = 'text/csv'): File {
 }
 
 function dropFile(file: File) {
-  const dropzone = screen.getByRole('button', { name: UI_COPY.ARIA.DROPZONE });
   const input = document.querySelector('input[type="file"]') as HTMLInputElement;
   Object.defineProperty(input, 'files', { value: [file], configurable: true });
   fireEvent.change(input);

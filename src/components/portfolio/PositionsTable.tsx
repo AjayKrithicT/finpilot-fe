@@ -37,7 +37,7 @@ export function PositionsTable({ customerId }: PositionsTableProps) {
   const [search, setSearch] = useState('');
   const [assetClass, setAssetClass] = useState<AssetClass | ''>('');
   const [page, setPage] = useState(1);
-  const [limit, setLimit] = useState(PAGINATION_DEFAULTS.LIMIT);
+  const [limit, setLimit] = useState<number>(PAGINATION_DEFAULTS.LIMIT);
 
   const [result, setResult] = useState<PaginatedPositions | null>(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -68,7 +68,9 @@ export function PositionsTable({ customerId }: PositionsTableProps) {
     }
   }, [customerId, page, limit, debouncedSearch, assetClass]);
 
-  useEffect(() => { void load(); }, [load]);
+  useEffect(() => {
+    (async () => { await load(); })();
+  }, [load]);
 
   // Reset to page 1 whenever filters change
   const handleSearch = (value: string) => { setSearch(value); setPage(1); };

@@ -67,6 +67,7 @@ export function GoalFormModal({
   // Populate form when editing
   useEffect(() => {
     if (isOpen) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setErrors({});
       if (initialGoal) {
         setForm({

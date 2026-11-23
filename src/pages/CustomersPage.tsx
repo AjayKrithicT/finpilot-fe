@@ -50,7 +50,7 @@ export function CustomersPage() {
   }, []);
 
   useEffect(() => {
-    void load(filters);
+    (async () => { await load(filters); })();
   }, [filters, load]);
 
   // Filter change: reset page to 1

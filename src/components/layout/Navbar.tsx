@@ -6,7 +6,7 @@
 
 import { NavLink } from 'react-router-dom';
 import { LogOutIcon } from 'lucide-react';
-import { useAuth } from '../../context/AuthContext';
+import { useAuth } from '../../context/useAuth';
 import { APP_ROUTES } from '../../constants/routes.constants';
 import { UI_COPY } from '../../constants/ui.constants';
 import { Badge } from '../reusables/Badge';

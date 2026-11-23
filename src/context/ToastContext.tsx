@@ -7,7 +7,6 @@
 
 import {
   createContext,
-  useContext,
   useState,
   useCallback,
   type ReactNode,
@@ -27,6 +26,8 @@ interface ToastContextValue {
   addToast: (message: string, tone: ToastTone) => void;
 }
 
+export { ToastContextValue };
+
 // ── Tone → Tailwind classes ───────────────────────────────────────────────────
 
 const TOAST_CLASSES: Record<ToastTone, string> = {
@@ -38,7 +39,8 @@ const TOAST_CLASSES: Record<ToastTone, string> = {
 
 // ── Context ───────────────────────────────────────────────────────────────────
 
-const ToastContext = createContext<ToastContextValue | null>(null);
+// eslint-disable-next-line react-refresh/only-export-components
+export const ToastContext = createContext<ToastContextValue | null>(null);
 
 let _toastCounter = 0;
 
@@ -78,10 +80,3 @@ export function ToastProvider({ children }: { children: ReactNode }) {
   );
 }
 
-// ── Hook ──────────────────────────────────────────────────────────────────────
-
-export function useToast(): ToastContextValue {
-  const ctx = useContext(ToastContext);
-  if (!ctx) throw new Error('useToast must be used inside <ToastProvider>');
-  return ctx;
-}

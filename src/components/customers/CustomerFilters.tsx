@@ -40,6 +40,7 @@ export function CustomerFilters({ filters, onChange, onReset }: CustomerFiltersP
 
   // Sync external reset back into local state
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setSearchInput(filters.search ?? '');
   }, [filters.search]);
 
